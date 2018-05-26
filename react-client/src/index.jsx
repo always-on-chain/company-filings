@@ -14,27 +14,6 @@ class App extends React.Component {
     this.post = this.post.bind(this);
   }
 
-  // filterLinks(links) {
-  //   //filter links that have 'documentsbutton' id
-  //   let documentsButtonLinks = [];
-
-  //   for (let i = 0; i < links.length; i++) {
-  //     if (links[i].id === 'documentsbutton') {
-  //       documentsButtonLinks.push(links[i]);
-  //     }
-  //   }
-
-  //   console.log('documentButtonsLinks', documentsButtonLinks)
-  //   return documentsButtonLinks;
-  // }
-
-  // getLinks(html) {
-  //   let element = document.createElement('html');
-  //   element.innerHTML = html;
-  //   let links = element.getElementsByTagName('a');
-
-  //   return this.filterLinks(links);
-  // }
   filterData(rows) {
     let data = {
       filingType: '',
