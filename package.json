@@ -1,0 +1,31 @@
+{
+  "name": "company-filings",
+  "version": "1.0.0",
+  "description": "Full stack app that enables users to access company filing documents quickly",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "webpack": "^4.9.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^2.1.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waynekwest88/company-filings.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waynekwest88/company-filings/issues"
+  },
+  "homepage": "https://github.com/waynekwest88/company-filings#readme"
+}
