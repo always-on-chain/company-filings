@@ -1,6 +1,6 @@
 const request = require('request');
 
-const getFilingData = (company) => {
+const getFilingData = (company, callback) => {
   let options = {
     url: `https://www.sec.gov/cgi-bin/browse-edgar?CIK=${company}&owner=exclude&action=getcompany`
   };
@@ -8,7 +8,8 @@ const getFilingData = (company) => {
   request(options, (err, response, body) => {
     console.log('error:', err);
     console.log('statusCode:', response.statusCode);
-    console.log('body:', body);
+    // console.log('body:', body);
+    callback(body);
   })
 }
 
