@@ -14,26 +14,58 @@ class App extends React.Component {
     this.post = this.post.bind(this);
   }
 
-  filterLinks(links) {
-    //filter links that have 'documentsbutton' id
-    let documentsButtonLinks = [];
+  // filterLinks(links) {
+  //   //filter links that have 'documentsbutton' id
+  //   let documentsButtonLinks = [];
 
-    for (let i = 0; i < links.length; i++) {
-      if (links[i].id === 'documentsbutton') {
-        documentsButtonLinks.push(links[i]);
-      }
+  //   for (let i = 0; i < links.length; i++) {
+  //     if (links[i].id === 'documentsbutton') {
+  //       documentsButtonLinks.push(links[i]);
+  //     }
+  //   }
+
+  //   console.log('documentButtonsLinks', documentsButtonLinks)
+  //   return documentsButtonLinks;
+  // }
+
+  // getLinks(html) {
+  //   let element = document.createElement('html');
+  //   element.innerHTML = html;
+  //   let links = element.getElementsByTagName('a');
+
+  //   return this.filterLinks(links);
+  // }
+  filterData(rows) {
+    let data = {
+      filingType: '',
+      url: '',
+      date: ''
+    }
+    let filings = [];
+
+    //start at 3 and end at 1 less than length to get rows that contain filings
+    for (let i = 3; i < rows.length - 1; i++) {
+      let tds = rows[i].cells;
+
+      data.filingType = tds[0].innerHTML;
+      data.url = tds[1].innerHTML;
+      data.date = tds[3].innerHTML;
+
+      filings.push(data);
+      data = {};
     }
 
-    console.log('documentButtonsLinks', documentsButtonLinks)
-    return documentsButtonLinks;
+    console.log('filings', filings)
+    return filings;
   }
 
-  getLinks(html) {
+  getRows(html) {
     let element = document.createElement('html');
     element.innerHTML = html;
-    let links = element.getElementsByTagName('a');
+    let rows = element.getElementsByTagName('tr')
 
-    return this.filterLinks(links);
+    // console.log(rows);
+    return this.filterData(rows);
   }
 
   post(company) {
@@ -44,7 +76,7 @@ class App extends React.Component {
       data: company,
       success: (data) => {
         this.setState({
-          filings: this.getLinks(data)
+          filings: this.getRows(data)
         })
         console.log('state', this.state.filings)
         // console.log('Successful ajax post request: ', data);
