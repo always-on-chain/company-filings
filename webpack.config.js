@@ -20,7 +20,7 @@ const config = {
     ]
   },
   externals: {
-    "jquery": "JQuery"
+    "jquery": "jQuery"
     //plan to use AJAX requests
   }
 }
