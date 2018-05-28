@@ -34,6 +34,7 @@ class App extends React.Component {
       data = {};
     }
 
+    console.log('filings', filings)
     return filings;
   }
 

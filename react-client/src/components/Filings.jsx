@@ -21,6 +21,7 @@ class Filings extends React.Component {
   getFilingUrl(html) {
     let element = document.createElement('html');
     element.innerHTML = html;
+    // console.log('element', element)
     let filingUrl = element.getElementsByClassName('tableFile')[0]
                       .getElementsByTagName('tbody')[0]
                       .getElementsByTagName('tr')[1]
@@ -55,7 +56,9 @@ class Filings extends React.Component {
 
   updateFilingUrls() {
     this.state.filings.map((filing, index) => {
-      let filingLandingPage = 'https://www.sec.gov' + filing.url.slice(9, 86);
+      let sliceLimit = filing.url.indexOf('id');
+      let filingLandingPage = 'https://www.sec.gov' + filing.url.slice(9, sliceLimit - 2);
+      console.log('filingLandingPage', filingLandingPage)
       this.getFilingHTML(filingLandingPage, index);
     })
   }
