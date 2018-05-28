@@ -7,10 +7,15 @@ class Filings extends React.Component {
     this.state = {
       filings: props.filings,
       updatedFilings: false,
+      types: {
+        All: true
+      },
+      currentType: 'All'
     }
 
     this.getFilingUrl = this.getFilingUrl.bind(this);
     this.getFilingHTML = this.getFilingHTML.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   getFilingUrl(html) {
@@ -50,14 +55,25 @@ class Filings extends React.Component {
 
   updateFilingUrls() {
     this.state.filings.map((filing, index) => {
-      let filingType = filing.filingType;
       let filingLandingPage = 'https://www.sec.gov' + filing.url.slice(9, 86);
-      let date = filing.date;
       this.getFilingHTML(filingLandingPage, index);
     })
   }
 
+  getTypes() {
+    this.state.filings.map((filing) => {
+      this.state.types[filing.type] = true || false;
+    })
+  }
+
+  handleChange(event) {
+    this.setState({
+      currentType: event.target.value
+    })
+  }
+
   componentWillMount() {
+    this.getTypes();
     let updatedFilings = this.updateFilingUrls();
     this.setState({
       updatedFilings: updatedFilings
@@ -66,22 +82,31 @@ class Filings extends React.Component {
 
   render() {
     if (!this.state.updatedFilings) {
-      console.log('hi')
       return <div id="incomplete">Loading...</div>
     } else {
       return (
-        <table>
-          <tr><td>Type</td><td>Filing</td><td>Date</td></tr>
-          {this.state.filings.map((filing, index) => {
-            return (
-              <tr>
-                <td>{filing.filingType}</td>
-                <td><a href={filing.url} target="_blank">{filing.url}</a></td>
-                <td>{filing.date}</td>
-              </tr>
-            )
+        <div>
+          Filter by Type
+          <select onChange={this.handleChange}>
+          {Object.keys(this.state.types).map((type) => {
+            return <option value={type}>{type}</option>
           })}
-        </table>
+          </select>
+          <table>
+            <tr><td>Type</td><td>Filing</td><td>Date</td></tr>
+            {this.state.filings.map((filing, index) => {
+              if (filing.type === this.state.currentType || this.state.currentType === 'All') {
+                return (
+                  <tr>
+                    <td>{filing.type}</td>
+                    <td><a href={filing.url} target="_blank">{filing.url}</a></td>
+                    <td>{filing.date}</td>
+                  </tr>
+                )
+              }
+            })}
+          </table>
+        </div>
       )
     }
   }

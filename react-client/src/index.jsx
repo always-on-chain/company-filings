@@ -16,7 +16,7 @@ class App extends React.Component {
 
   filterData(rows) {
     let data = {
-      filingType: '',
+      type: '',
       url: '',
       date: ''
     }
@@ -26,7 +26,7 @@ class App extends React.Component {
     for (let i = 3; i < rows.length - 1; i++) {
       let tds = rows[i].cells;
 
-      data.filingType = tds[0].innerHTML;
+      data.type = tds[0].innerHTML;
       data.url = tds[1].innerHTML;
       data.date = tds[3].innerHTML;
 

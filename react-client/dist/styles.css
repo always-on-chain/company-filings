@@ -1,3 +1,10 @@
-td, table {
+
+td {
   border: 1px solid black;
+}
+
+table {
+  margin-top: 2%;
+  border-collapse: collapse;
+  width: 94%;
 }
