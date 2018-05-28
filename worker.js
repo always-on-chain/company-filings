@@ -13,4 +13,18 @@ const getFilingData = (company, callback) => {
   })
 }
 
+const getFilingPage = (url, callback) => {
+  let options = {
+    url: url
+  };
+
+  request(options, (err, response, body) => {
+    console.log('error:', err);
+    console.log('statusCode:', response.statusCode);
+    // console.log('body:', body);
+    callback(body);
+  })
+}
+
 module.exports.getFilingData = getFilingData;
+module.exports.getFilingPage = getFilingPage;

@@ -4,7 +4,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      company: ''
+      company: '',
     }
 
     this.handleChange = this.handleChange.bind(this);

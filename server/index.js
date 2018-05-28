@@ -13,6 +13,12 @@ app.post('/', (req, res) => {
   });
 })
 
+app.post('/filing', (req, res) => {
+  worker.getFilingPage(req.body, (html) => {
+    res.send(html);
+  });
+})
+
 const port = 3000;
 
 app.listen(port, () => {

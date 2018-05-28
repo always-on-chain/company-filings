@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filings: []
+      filings: [],
     }
 
     this.post = this.post.bind(this);
@@ -34,7 +34,6 @@ class App extends React.Component {
       data = {};
     }
 
-    console.log('filings', filings)
     return filings;
   }
 
@@ -42,8 +41,6 @@ class App extends React.Component {
     let element = document.createElement('html');
     element.innerHTML = html;
     let rows = element.getElementsByTagName('tr')
-
-    // console.log(rows);
     return this.filterData(rows);
   }
 
@@ -57,7 +54,6 @@ class App extends React.Component {
         this.setState({
           filings: this.getRows(data)
         })
-        console.log('state', this.state.filings)
         // console.log('Successful ajax post request: ', data);
       },
       error: (error) => {
@@ -67,10 +63,17 @@ class App extends React.Component {
   }
 
   render() {
+    if (this.state.filings.length > 0) {
+      return (
+        <div>
+          <Search post={this.post} />
+          <Filings filings={this.state.filings} getFilingHTML={this.getFilingHTML} />
+        </div>
+      )
+    }
     return (
-      <div id="components">
+      <div>
         <Search post={this.post} />
-        <Filings filings={this.state.filings} />
       </div>
     )
   }
