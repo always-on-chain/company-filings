@@ -1,7 +1,5 @@
 import React from 'react';
 import $ from 'jquery';
-import Filing from './Filing.jsx';
-import App from '../index.jsx';
 
 class Filings extends React.Component {
   constructor(props) {
@@ -68,18 +66,22 @@ class Filings extends React.Component {
 
   render() {
     if (!this.state.updatedFilings) {
-      return (
-        <div id="loading">
-          <img src="../../dist/Spinnger.png" />
-        </div>
-      )
+      console.log('hi')
+      return <div id="incomplete">Loading...</div>
     } else {
       return (
-        this.state.filings.map((filing, index) => {
-          return <Filing filingUrl={filing.url} 
-                         filingType={filing.filingType} 
-                         date={filing.date} />
-        })
+        <table>
+          <tr><td>Type</td><td>Filing</td><td>Date</td></tr>
+          {this.state.filings.map((filing, index) => {
+            return (
+              <tr>
+                <td>{filing.filingType}</td>
+                <td><a href={filing.url} target="_blank">{filing.url}</a></td>
+                <td>{filing.date}</td>
+              </tr>
+            )
+          })}
+        </table>
       )
     }
   }
