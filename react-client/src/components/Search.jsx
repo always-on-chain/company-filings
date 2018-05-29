@@ -1,10 +1,12 @@
 import React from 'react';
+import Filings from './Filings.jsx';
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      company: '',
+      filings: props.filings,
+      company: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,6 +26,7 @@ class Search extends React.Component {
   }
 
   render() {
+    // console.log('filings in search', this.state.filings)
     return ( 
       <div>
         <form onSubmit={this.handleClick}>
@@ -33,6 +36,7 @@ class Search extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        {/* <Filings filings={this.state.filings} /> */}
       </div>
     )
   }

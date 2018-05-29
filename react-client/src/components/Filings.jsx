@@ -10,7 +10,8 @@ class Filings extends React.Component {
       types: {
         All: true
       },
-      currentType: 'All'
+      currentType: 'All',
+      company: props.company
     }
 
     this.getFilingUrl = this.getFilingUrl.bind(this);
@@ -87,14 +88,20 @@ class Filings extends React.Component {
     if (!this.state.updatedFilings) {
       return <div id="incomplete">Loading...</div>
     } else {
+      // console.log('Filings in Filings', this.state.filings)
       return (
         <div>
           Filter by Type
           <select onChange={this.handleChange}>
-          {Object.keys(this.state.types).map((type) => {
-            return <option value={type}>{type}</option>
-          })}
+            {Object.keys(this.state.types).map((type) => {
+              return <option value={type}>{type}</option>
+            })}
           </select>
+          
+          <div>
+            Filings for {this.state.company}
+          </div>
+
           <table>
             <tr><td>Type</td><td>Filing</td><td>Date</td></tr>
             {this.state.filings.map((filing, index) => {
