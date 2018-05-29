@@ -38,7 +38,7 @@ class Search extends React.Component {
           <FormControl
             type="text"
             value={this.state.company}
-            placeholder="Enter text"
+            placeholder='Enter company trading symbol (i.e. "AAPL")'
             onChange={this.handleChange}
             id="search-company"
           />
