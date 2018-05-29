@@ -60,7 +60,7 @@ class App extends React.Component {
   post(company) {
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:3000/',
+      url: '/',
       contentType: 'text/plain',
       data: company,
       success: (data) => {

@@ -34,7 +34,7 @@ class Filings extends React.Component {
   getFilingHTML(url, index) {
     $.ajax({ 
       method: 'POST',
-      url: 'http://localhost:3000/filing',
+      url: '/filing',
       contentType: 'text/plain',
       data: url, 
       success: (data) => {
