@@ -1,5 +1,8 @@
 import React from 'react';
 import Filings from './Filings.jsx';
+import Button from 'react-bootstrap/lib/Button';
+import FormControl from 'react-bootstrap/lib/FormControl';
+
 
 class Search extends React.Component {
   constructor(props) {
@@ -30,11 +33,17 @@ class Search extends React.Component {
     return ( 
       <div>
         <form onSubmit={this.handleClick}>
-          <label>
-            Search Company
-            <input type="text" value={this.state.company} id="input" onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
+          <div id="search-text">Search Company</div>
+
+          <FormControl
+            type="text"
+            value={this.state.company}
+            placeholder="Enter text"
+            onChange={this.handleChange}
+            id="search-company"
+          />
+          
+          <Button bsStyle="success" bsSize="small" type="submit" id="search-button">Find</Button>
         </form>
         {/* <Filings filings={this.state.filings} /> */}
       </div>

@@ -91,19 +91,21 @@ class Filings extends React.Component {
       // console.log('Filings in Filings', this.state.filings)
       return (
         <div>
-          Filter by Type
-          <select onChange={this.handleChange}>
-            {Object.keys(this.state.types).map((type) => {
-              return <option value={type}>{type}</option>
-            })}
-          </select>
-          
-          <div>
+          <div id="company-name">
             Filings for {this.state.company}
           </div>
 
-          <table>
-            <tr><td>Type</td><td>Filing</td><td>Date</td></tr>
+          <div id="types">
+            Filter by Type
+            <select onChange={this.handleChange} id="menu">
+              {Object.keys(this.state.types).map((type) => {
+                return <option value={type}>{type}</option>
+              })}
+            </select>
+          </div>
+
+          <table id="filings">
+            <tr id="table-header"><td>Type</td><td>Filing</td><td>Date</td></tr>
             {this.state.filings.map((filing, index) => {
               if (filing.type === this.state.currentType || this.state.currentType === 'All') {
                 return (

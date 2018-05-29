@@ -1,10 +1,44 @@
 
+body {
+  padding-left: 1%;
+  padding-top: 1%;
+}
+
 td {
   border: 1px solid black;
+  height: 30px;
+  text-align: center;
+}
+
+#table-header {
+  font-weight: 500;
 }
 
 table {
-  margin-top: 2%;
+  margin-top: 1%;
   border-collapse: collapse;
   width: 94%;
+  font-weight: 300;
+  font-size: 1.1em;
+}
+
+#search-text {
+  font-size: 1.25em;
+}
+
+#company-name {
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+#search-button, #search-company, #menu {
+  margin-left: 1%;
+}
+
+#search-button, #search-company, #search-text {
+  display: inline;
+}
+
+#search-company {
+  width: 10%;
 }
