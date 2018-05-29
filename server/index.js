@@ -1,3 +1,4 @@
+require('dotenv').load();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -21,6 +22,6 @@ app.post('/filing', (req, res) => {
 
 const port = 3000;
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+app.listen(process.env.PORT || port, () => {
+  console.log(`listening on port ${process.env.PORT || port}`);
 })
