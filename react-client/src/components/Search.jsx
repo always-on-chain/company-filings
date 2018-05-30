@@ -29,7 +29,6 @@ class Search extends React.Component {
   }
 
   render() {
-    // console.log('filings in search', this.state.filings)
     return ( 
       <div>
         <form onSubmit={this.handleClick}>
@@ -45,7 +44,6 @@ class Search extends React.Component {
           
           <Button bsStyle="success" bsSize="small" type="submit" id="search-button">Find</Button>
         </form>
-        {/* <Filings filings={this.state.filings} /> */}
       </div>
     )
   }

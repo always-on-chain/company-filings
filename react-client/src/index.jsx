@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       filings: [],
+      changedCompanies: false,
       company: ''
     }
 
@@ -35,7 +36,6 @@ class App extends React.Component {
       data = {};
     }
 
-    // console.log('filings', filings)
     return filings;
   }
 
@@ -53,7 +53,6 @@ class App extends React.Component {
     let sliceLimit = nameElement.indexOf('<');
     let name = nameElement.slice(0, sliceLimit - 1);
 
-    console.log('name', name)
     return name;
   }
 
@@ -64,13 +63,11 @@ class App extends React.Component {
       contentType: 'text/plain',
       data: company,
       success: (data) => {
-        // console.log('DATA', data)
         this.setState({
           filings: this.getRows(data),
           company: this.getCompanyName(data)
         })
         // console.log('Successful ajax post request: ', data);
-        console.log('company', this.state)
       },
       error: (error) => {
         console.log('Error on ajax post request: ', error);
@@ -80,21 +77,14 @@ class App extends React.Component {
 
   render() {
     if (this.state.filings.length > 0) {
-      // console.log('filings in index', this.state.filings)
-      console.log('state', this.state)
       return (
         <div>
-          <Search post={this.post} filings={this.state.filings} />
+          <Search post={this.post} />
           <Filings filings={this.state.filings} company={this.state.company} />
         </div>
       )
-    } else {
-      return (
-        <div>
-          <Search post={this.post} filings={this.state.filings} />
-        </div>
-      )
     }
+    return <Search post={this.post} filings={this.state.filings} />
   }
 }
 

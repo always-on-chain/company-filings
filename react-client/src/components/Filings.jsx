@@ -13,7 +13,6 @@ class Filings extends React.Component {
       currentType: 'All',
       company: props.company
     }
-
     this.getFilingUrl = this.getFilingUrl.bind(this);
     this.getFilingHTML = this.getFilingHTML.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -41,7 +40,7 @@ class Filings extends React.Component {
         let url = this.getFilingUrl(data);
         let sliceLimit = url.indexOf('>');
         let updatedUrl = 'https://www.sec.gov' + this.getFilingUrl(data).slice(9, sliceLimit - 1);
-        console.log('new url', updatedUrl, index, this.getFilingUrl(data))
+        // console.log('new url', updatedUrl, index, this.getFilingUrl(data))
         this.state.filings[index].url = updatedUrl;
         if (index === this.state.filings.length - 1) {
           this.setState({
@@ -55,19 +54,20 @@ class Filings extends React.Component {
     });
   }
 
-  updateFilingUrls() {
-    this.state.filings.map((filing, index) => {
+  updateFilingUrls(filings) {
+    filings.map((filing, index) => {
       let sliceLimit = filing.url.indexOf('id');
       let filingLandingPage = 'https://www.sec.gov' + filing.url.slice(9, sliceLimit - 2);
-      console.log('filingLandingPage', filingLandingPage)
+      // console.log('filingLandingPage', filingLandingPage)
       this.getFilingHTML(filingLandingPage, index);
     })
   }
 
-  getTypes() {
-    this.state.filings.map((filing) => {
+  getTypes(filings) {
+    filings.map((filing) => {
       this.state.types[filing.type] = true || false;
     })
+    // console.log('types', this.state.types)
   }
 
   handleChange(event) {
@@ -76,21 +76,29 @@ class Filings extends React.Component {
     })
   }
 
-  componentWillMount() {
-    this.getTypes();
-    let updatedFilings = this.updateFilingUrls();
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      updatedFilings: updatedFilings
+      filings: nextProps.filings,
+      updatedFilings: false,
+      currentType: 'All',
+      company: nextProps.company
     })
+    this.getTypes(nextProps.filings);
+    this.updateFilingUrls(nextProps.filings);
   }
+
+  componentWillMount() {
+    this.getTypes(this.state.filings);
+    this.updateFilingUrls(this.state.filings);
+  }
+
 
   render() {
     if (!this.state.updatedFilings) {
       return <div id="incomplete">Loading...</div>
     } else {
-      // console.log('Filings in Filings', this.state.filings)
       return (
-        <div>
+        <div id="filings">
           <div id="company-name">
             Filings for {this.state.company}
           </div>
@@ -104,7 +112,7 @@ class Filings extends React.Component {
             </select>
           </div>
 
-          <table id="filings">
+          <table id="filings-table">
             <tr id="table-header"><td>Type</td><td>Filing</td><td>Date</td></tr>
             {this.state.filings.map((filing, index) => {
               if (filing.type === this.state.currentType || this.state.currentType === 'All') {
