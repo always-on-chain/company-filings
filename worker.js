@@ -9,7 +9,11 @@ const getFilingData = (company, callback) => {
     console.log('error:', err);
     console.log('statusCode:', response.statusCode);
     // console.log('body:', body);
-    callback(body);
+    if (err) {
+      callback(body, err);
+    } else {
+      callback(body);
+    }
   })
 }
 
@@ -23,6 +27,9 @@ const getFilingPage = (url, callback) => {
     console.log('statusCode:', response.statusCode);
     // console.log('body:', body);
     callback(body);
+    if (err) {
+      alert('this is an error');
+    }
   })
 }
 

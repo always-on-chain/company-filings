@@ -39,7 +39,7 @@ class Filings extends React.Component {
       success: (data) => {
         let url = this.getFilingUrl(data);
         let sliceLimit = url.indexOf('>');
-        let updatedUrl = 'https://www.sec.gov' + this.getFilingUrl(data).slice(9, sliceLimit - 1);
+        let updatedUrl = 'https://www.sec.gov' + url.slice(9, sliceLimit - 1);
         // console.log('new url', updatedUrl, index, this.getFilingUrl(data))
         this.state.filings[index].url = updatedUrl;
         if (index === this.state.filings.length - 1) {
@@ -65,7 +65,7 @@ class Filings extends React.Component {
 
   getTypes(filings) {
     filings.map((filing) => {
-      this.state.types[filing.type] = true || false;
+      this.state.types[filing.type] = true;
     })
     // console.log('types', this.state.types)
   }

@@ -1,4 +1,4 @@
-require('dotenv').load();
+// require('dotenv').load();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -9,8 +9,12 @@ app.use(bodyParser.text());
 
 app.post('/', (req, res) => {
   console.log('body', req.body);
-  worker.getFilingData(req.body, (html) => {
-    res.send(html);
+  worker.getFilingData(req.body, (html, err) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.send(html);
+    }
   });
 })
 

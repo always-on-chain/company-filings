@@ -10,7 +10,8 @@ class App extends React.Component {
     this.state = {
       filings: [],
       changedCompanies: false,
-      company: ''
+      company: '',
+      error: false
     }
 
     this.post = this.post.bind(this);
@@ -56,6 +57,12 @@ class App extends React.Component {
     return name;
   }
 
+  handleError() {
+    this.setState({
+      error: true,
+    })
+  }
+
   post(company) {
     $.ajax({
       method: 'POST',
@@ -65,17 +72,22 @@ class App extends React.Component {
       success: (data) => {
         this.setState({
           filings: this.getRows(data),
-          company: this.getCompanyName(data)
+          company: this.getCompanyName(data),
+          error: false
         })
         // console.log('Successful ajax post request: ', data);
       },
       error: (error) => {
         console.log('Error on ajax post request: ', error);
+        this.handleError();
       }
     })
   }
 
   render() {
+    if (this.state.error) {
+      return <p>This is an Error</p>
+    }
     if (this.state.filings.length > 0) {
       return (
         <div>
